@@ -20,28 +20,28 @@ api = tweepy.API(auth)
 
 try:
     api.verify_credentials()
-    print('Authentication OK')
+    print('🟢Authentication OK')
 except:
-    print('Error in authentication')
+    print('🔴Error in authentication')
 
 
 class StreamListener(tweepy.Stream):
 
     def on_status(self, tweet):
-        print(f"Tweet by {tweet.author.screen_name} - {tweet.text}")
+        print(f" Tweet by @{tweet.author.screen_name}")
         # Check if the tweet's author is not us and check if tweet is not already retweeted
         if tweet.in_reply_to_status_id is None and int(tweet.author.id) != int(BOT_ID):
             if not tweet.retweeted:
                 try:
-                    print('Attempting retweet ..... ')
+                    print('Attempting retweet ........ 🟡')
                     api.retweet(tweet.id)
                     print('Tweet succesfully retweeted ✅')
-                    time.sleep(120)
+                    time.sleep(int(SLEEP_TIME))
                 except Exception as err:
                     print(err)
 
     def on_error(self, status):
-        print(f"Error while retweeting: {status}")
+        print(f"🔴 Error while retweeting: {status}")
 
 
 stream = StreamListener(
