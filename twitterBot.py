@@ -30,7 +30,7 @@ class StreamListener(tweepy.Stream):
     def on_status(self, tweet):
         print(f"Tweet by {tweet.author.screen_name} - {tweet.text}")
         # Check if the tweet's author is not us and check if tweet is not already retweeted
-        if tweet.in_reply_to_status_id is None and tweet.author.id != BOT_ID:
+        if tweet.in_reply_to_status_id is None and int(tweet.author.id) != int(BOT_ID):
             if not tweet.retweeted:
                 try:
                     print('Attempting retweet ..... ')
