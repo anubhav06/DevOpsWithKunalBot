@@ -49,4 +49,4 @@ stream = StreamListener(
   ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 )
 # Look for tweets with the below mentioned words/tags only
-stream.filter(track=['#DevOpsWithKunal', "#devopswithkunal", "DevOpswithKunal"])
+stream.filter(track=['#DevOpsWithKunal', "#devopswithkunal", "DevOpswithKunal", "#DevOpswithkunal", "#devopsWithKunal", "#Devopswithkunal"])
