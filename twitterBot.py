@@ -8,9 +8,9 @@ ACCESS_TOKEN = config('ACCESS_TOKEN')
 ACCESS_TOKEN_SECRET = config('ACCESS_TOKEN_SECRET')
 
 # ID of @devopswithkunal account
-BOT_ID = config('BOT_ID')
+BOT_ID = 1460548132870111233
 # Time between retweeting a tweet again. Set to 120 in accordance with the twitter api requests limits
-SLEEP_TIME = config('SLEEP_TIME')
+SLEEP_TIME = 120
 
 # Twitter authentication
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
