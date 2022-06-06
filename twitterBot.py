@@ -29,16 +29,19 @@ class StreamListener(tweepy.Stream):
 
     def on_status(self, tweet):
         print(f" Tweet by @{tweet.author.screen_name}")
-        # Check if the tweet's author is not us and check if tweet is not already retweeted
-        if tweet.in_reply_to_status_id is None and int(tweet.author.id) != int(BOT_ID):
-            if not tweet.retweeted:
-                try:
+        # Check if the tweet's author is not us and if the tweet is not a reply and if tweet is not already retweeted
+        if tweet.in_reply_to_status_id is None and int(tweet.author.id) != int(BOT_ID) and not tweet.retweeted:
+            # Check if the tweet author is not blocked by us
+            if str(tweet.author.id) not in api.get_blocked_ids(stringify_ids = True):
+                try:                    
                     print('Attempting retweet ........ 🟡')
                     api.retweet(tweet.id)
                     print('Tweet succesfully retweeted ✅')
                     time.sleep(int(SLEEP_TIME))
                 except Exception as err:
                     print(err)
+            else:
+                time.sleep(int(SLEEP_TIME))
 
     def on_error(self, status):
         print(f"🔴 Error while retweeting: {status}")
