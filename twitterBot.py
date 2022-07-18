@@ -46,8 +46,16 @@ class StreamListener(tweepy.Stream):
                             print(err)
                     else:
                         print('🛑Blocked tweet by: ', tweet.author.screen_name)
+                # If the tweet is not retweeted by anyone else, any the root tweet's author is not blocked.
                 else:
                     print('No attribute')
+                    try:                    
+                        print('Attempting retweet ........ 🟡')
+                        api.retweet(tweet.id)
+                        print('Tweet succesfully retweeted ✅')
+                        time.sleep(int(SLEEP_TIME))
+                    except Exception as err:
+                        print(err)
             else:
                 print('🛑Blocked tweet by: ', tweet.author.screen_name)
                 time.sleep(int(SLEEP_TIME))
